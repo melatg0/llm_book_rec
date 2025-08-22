@@ -1,25 +1,55 @@
-# BookMood AI - Intelligent Book Recommendations
+# LLM Book Recommendations
 
-A modern web application that uses AI to recommend books based on your mood and preferences. Built with React, TypeScript, and enhanced with GPT API for intelligent recommendations and Google Books API for rich book data.
+A modern, AI-powered book recommendation system that provides personalized reading suggestions based on user preferences and reading history.
 
 ## Features
 
-- 🤖 **AI-Powered Recommendations**: Uses GPT API to understand your mood and suggest perfect books
-- 📚 **Rich Book Data**: Integrates with Google Books API for covers, summaries, and detailed information
-- 🎨 **Beautiful UI**: Modern, responsive design with smooth animations and carousel display
-- 💭 **Mood-Based Suggestions**: Pre-built prompts for different emotional states and reading preferences
-- 📱 **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
+### 🎯 Smart Recommendations
+- **AI-Powered Suggestions**: Uses GPT-3.5-turbo to generate personalized book recommendations
+- **Quality-Focused**: Prioritizes well-rated books (4.0+ Goodreads rating with 1000+ reviews)
+- **Popular & Accessible**: Recommends books that are widely available and well-reviewed
+- **Avoids Niche Books**: Filters out obscure, self-published, or hard-to-find books
 
-## Tech Stack
+### 📚 Multiple Data Sources
+- **Google Books API**: Primary source for book metadata and covers
+- **OpenLibrary**: Reliable fallback for book covers
+- **Internet Archive**: Additional cover source
+- **WorldCat**: Library catalog integration
+- **Multiple CORS Proxies**: Ensures reliable image loading
 
-- **Frontend**: React 18 + TypeScript + Vite
-- **UI Components**: Shadcn/ui + Tailwind CSS
-- **AI Integration**: OpenAI GPT API
-- **Book Data**: Google Books API
-- **State Management**: React Query
-- **Animations**: Tailwind CSS + CSS animations
+### 🖼️ Robust Cover Handling
+- **Multi-Source Fallback**: Tries multiple APIs to find book covers
+- **CORS Proxy Support**: Handles cross-origin image loading issues
+- **Automatic Validation**: Validates image URLs before displaying
+- **Graceful Degradation**: Falls back to placeholder when no cover is available
 
-## Setup
+### 📊 Enhanced Book Data
+- **Rating Integration**: Fetches ratings from multiple sources
+- **Review Counts**: Shows how many people have rated each book
+- **Detailed Metadata**: Includes publication date, page count, publisher
+- **Goodreads Integration**: Direct links to view books on Goodreads
+
+### 📈 User Preference Analysis
+- **Goodreads Import**: Analyzes reading history from CSV exports
+- **Genre Preferences**: Identifies favorite genres and authors
+- **Rating Patterns**: Understands user's rating preferences
+- **Reading Goals**: Considers user's reading objectives
+
+## Recent Improvements
+
+### Book Cover Reliability
+- **Multiple API Sources**: Now tries OpenLibrary, Internet Archive, WorldCat, and Google Books
+- **CORS Proxy Service**: Handles cross-origin image loading with multiple proxy options
+- **Automatic Validation**: Validates each image URL before using it
+- **Better Error Handling**: Graceful fallback to placeholder images
+
+### Recommendation Quality
+- **Rating Requirements**: Now prioritizes books with 4.0+ Goodreads ratings and 1000+ reviews
+- **Popularity Focus**: Emphasizes well-known, established authors and books
+- **Accessibility**: Ensures recommended books are widely available
+- **Quality Filtering**: Avoids obscure, self-published, or out-of-print books
+
+## Getting Started
 
 1. **Clone the repository**
    ```bash
@@ -30,57 +60,48 @@ A modern web application that uses AI to recommend books based on your mood and 
 2. **Install dependencies**
    ```bash
    npm install
-   # or
-   bun install
    ```
 
 3. **Set up environment variables**
-   Create a `.env` file in the root directory:
-   ```env
-   VITE_OPENAI_API_KEY=your_openai_api_key_here
+   ```bash
+   cp env.example .env
+   ```
+   
+   Add your API keys:
+   ```
+   VITE_OPENAI_API_KEY=your_openai_api_key
+   VITE_GOOGLE_BOOKS_API_KEY=your_google_books_api_key
    ```
 
-4. **Get your OpenAI API key**
-   - Visit [OpenAI Platform](https://platform.openai.com/api-keys)
-   - Create a new API key
-   - Add it to your `.env` file
-
-5. **Run the development server**
+4. **Start the development server**
    ```bash
    npm run dev
-   # or
-   bun dev
    ```
 
-6. **Open your browser**
-   Navigate to `http://localhost:5173`
+## Usage
 
-## How It Works
+1. **Upload Goodreads Data**: Export your Goodreads library as CSV and upload it for personalized recommendations
+2. **Ask for Recommendations**: Describe what you're looking for in a book
+3. **Get Smart Suggestions**: Receive AI-powered recommendations with detailed explanations
+4. **View Book Details**: See covers, ratings, descriptions, and Goodreads links
 
-1. **User Input**: Users describe their mood or reading preferences
-2. **AI Processing**: GPT API analyzes the input and generates personalized book recommendations
-3. **Data Enhancement**: Google Books API provides covers, summaries, and additional book details
-4. **Display**: Books are shown in a beautiful carousel with rich information
+## API Sources
 
-## API Integration
+### Book Covers (in order of preference)
+1. **Google Books API** - High quality, official covers
+2. **OpenLibrary** - Reliable, community-maintained covers
+3. **Internet Archive** - Historical and public domain covers
+4. **WorldCat** - Library catalog covers
+5. **CORS Proxies** - Fallback for cross-origin issues
 
-### OpenAI GPT API
-- Processes user mood descriptions
-- Generates personalized book recommendations
-- Provides reasoning for each recommendation
-
-### Google Books API
-- Fetches book covers and images
-- Provides book summaries and descriptions
-- Includes publication details, ratings, and genres
+### Book Ratings
+1. **Google Books** - Official ratings and review counts
+2. **Goodreads** - Community ratings (when available)
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-MIT License - feel free to use this project for your own book recommendation needs!
+This project is licensed under the MIT License.
