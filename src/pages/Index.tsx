@@ -10,8 +10,10 @@ const Index = () => {
   const [books, setBooks] = useState<EnhancedBookData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPrompt, setCurrentPrompt] = useState("");
+  const [stage, setStage] = useState<"prompt" | "results">("prompt");
 
   const handlePromptSubmit = async (prompt: string) => {
+    setStage("results");
     setCurrentPrompt(prompt);
     setIsLoading(true);
     setBooks([]);
@@ -34,37 +36,38 @@ const Index = () => {
   };
 
   const handleNewChat = () => {
+    setStage("prompt");
     setBooks([]);
     setCurrentPrompt("");
   };
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Simple Header Section */}
-      <section className="py-20 px-6 text-center">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-hero bg-clip-text text-transparent">
-            BookMood AI
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-            Discover your perfect next read based on how you're feeling.
-          </p>
-          
-          <div className="max-w-2xl mx-auto">
-            <MoodPrompt onSubmit={handlePromptSubmit} isLoading={isLoading} />
-          </div>
-        </div>
-      </section>
+      {stage === "prompt" && (
+        <section className="py-20 px-6 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-hero bg-clip-text text-transparent">
+              BookMood AI
+            </h1>
+            <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
+              Discover your perfect next read based on how you're feeling.
+            </p>
 
-      {/* Books Results */}
-      {(books.length > 0 || isLoading) && (
-        <section className="py-20 px-6 bg-muted/30">
-          <div className="max-w-6xl mx-auto">
+            <div className="max-w-2xl mx-auto">
+              <MoodPrompt onSubmit={handlePromptSubmit} isLoading={isLoading} />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {stage === "results" && (
+        <section className="px-6 bg-muted/30 min-h-screen">
+          <div className="max-w-6xl mx-auto py-6">
             {currentPrompt && (
               <div className="text-center mb-8">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Books for "{currentPrompt}"</h2>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   onClick={handleNewChat}
                   className="mb-8"
                 >
@@ -72,7 +75,7 @@ const Index = () => {
                 </Button>
               </div>
             )}
-            
+
             {isLoading ? (
               <Carousel className="w-full max-w-5xl mx-auto">
                 <CarouselContent>
@@ -89,7 +92,7 @@ const Index = () => {
                 <CarouselPrevious />
                 <CarouselNext />
               </Carousel>
-            ) : (
+            ) : books.length > 0 ? (
               <Carousel className="w-full max-w-5xl mx-auto">
                 <CarouselContent>
                   {books.map((book, index) => (
@@ -109,6 +112,8 @@ const Index = () => {
                 <CarouselPrevious />
                 <CarouselNext />
               </Carousel>
+            ) : (
+              <p className="text-center text-muted-foreground">No books found. Try a different search term.</p>
             )}
           </div>
         </section>
