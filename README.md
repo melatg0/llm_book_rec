@@ -1,35 +1,26 @@
 # LLM Book Recommendations
 
 A modern, AI-powered book recommendation system that provides personalized reading suggestions based on user preferences and reading history.
-
-## Features
-
-### 🎯 Smart Recommendations
-- **AI-Powered Suggestions**: Uses GPT-3.5-turbo to generate personalized book recommendations
-- **Quality-Focused**: Prioritizes well-rated books (4.0+ Goodreads rating with 1000+ reviews)
-- **Popular & Accessible**: Recommends books that are widely available and well-reviewed
-- **Avoids Niche Books**: Filters out obscure, self-published, or hard-to-find books
-
-### 📚 Multiple Data Sources
+### Multiple Data Sources
 - **Google Books API**: Primary source for book metadata and covers
 - **OpenLibrary**: Reliable fallback for book covers
 - **Internet Archive**: Additional cover source
 - **WorldCat**: Library catalog integration
 - **Multiple CORS Proxies**: Ensures reliable image loading
 
-### 🖼️ Robust Cover Handling
+### Robust Cover Handling
 - **Multi-Source Fallback**: Tries multiple APIs to find book covers
 - **CORS Proxy Support**: Handles cross-origin image loading issues
 - **Automatic Validation**: Validates image URLs before displaying
 - **Graceful Degradation**: Falls back to placeholder when no cover is available
 
-### 📊 Enhanced Book Data
+### Enhanced Book Data
 - **Rating Integration**: Fetches ratings from multiple sources
 - **Review Counts**: Shows how many people have rated each book
 - **Detailed Metadata**: Includes publication date, page count, publisher
 - **Goodreads Integration**: Direct links to view books on Goodreads
 
-### 📈 User Preference Analysis
+### User Preference Analysis
 - **Goodreads Import**: Analyzes reading history from CSV exports
 - **Genre Preferences**: Identifies favorite genres and authors
 - **Rating Patterns**: Understands user's rating preferences
@@ -78,13 +69,6 @@ A modern, AI-powered book recommendation system that provides personalized readi
    npm run dev
    ```
 
-## Usage
-
-1. **Upload Goodreads Data**: Export your Goodreads library as CSV and upload it for personalized recommendations
-2. **Ask for Recommendations**: Describe what you're looking for in a book
-3. **Get Smart Suggestions**: Receive AI-powered recommendations with detailed explanations
-4. **View Book Details**: See covers, ratings, descriptions, and Goodreads links
-
 ## API Sources
 
 ### Book Covers (in order of preference)
@@ -101,7 +85,3 @@ A modern, AI-powered book recommendation system that provides personalized readi
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License.
